@@ -1,0 +1,13 @@
+- title: "Example Paper Title: Deep Learning for Communications"
+  authors: "J. Doe, A. Smith, B. García"
+  venue: "IEEE Transactions on Communications"
+  year: "2024"
+  url: "https://doi.org/10.1001/example"
+  highlight: true
+
+- title: "An Innovative Approach to Network Optimization"
+  authors: "C. Martinez, J. Doe"
+  venue: "Infocom 2023"
+  year: "2023"
+  url: "#"
+  highlight: false
