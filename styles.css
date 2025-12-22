@@ -154,5 +154,42 @@ footer {
     box-shadow: var(--shadow);
 }
 
+.pub-card {
+    background: var(--white);
+    padding: 1rem 0;
+    border-bottom: 1px dashed #eee;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+}
+
+.pub-card:hover {
+    padding-left: 10px;
+    background: #fffafa;
+}
+
+.pub-title {
+    font-weight: 600;
+    color: var(--text-dark);
+    display: block;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.pub-authors {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.pub-venue {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--urjc-red);
+}
+
+.pub-year {
+    font-weight: bold;
+    color: #333;
+}
+
 /* Eliminar position:fixed del footer si tienes mucho contenido, 
    es mejor que fluya al final de la página */
