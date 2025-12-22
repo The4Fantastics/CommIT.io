@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/commit_icon.ico" type="image/x-icon">
+    <title>CommIT - Research Group</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <header>
+        <img src="images/commit_logo.png" alt="CommIT Logo" id="logo">
+        <h1>CommIT</h1>
+        <p>Research Group</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="research_lines.html">Research Lines</a></li>
+            <li><a href="members.html">Members</a></li>
+            <!--
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#collaborations">Collaborations</a></li>
+            <li><a href="#docencia">Subjects</a></li>-->
+        </ul>
+    </nav>
+    <main>
+<section id="selected-publications">
+    <h2>Selected Publications</h2>
+    <div class="publications-list">
+        {% for pub in site.data.publications %}
+            {% if pub.highlight %}
+            <div class="pub-card">
+                <a href="{{ pub.url }}" class="pub-title" target="_blank">{{ pub.title }}</a>
+                <span class="pub-authors">{{ pub.authors }}</span><br>
+                <span class="pub-venue">{{ pub.venue }}</span> | <span class="pub-year">{{ pub.year }}</span>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <p style="margin-top: 20px;">
+        <a href="https://orcid.org/TU_ORCID" target="_blank" style="color: var(--urjc-red); text-decoration: none; font-weight: bold;">
+            View full list on ORCID →
+        </a>
+    </p>
+</section>
+    </main>
+    <footer>
+        <p>&copy; 2024 CommIT - Research Group</p>
+    </footer>
+</body>
+</html>
+
