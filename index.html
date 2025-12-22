@@ -44,6 +44,25 @@
             </ul>
             <p>For more details on our lines of research, please visit the section <a href="research_lines.html">Research Lines</a>.</p>
         </section>
+        <section id="selected-publications">
+    <h2>Selected Publications</h2>
+    <div class="publications-list">
+        {% for pub in site.data.publications %}
+            {% if pub.highlight %}
+            <div class="pub-card">
+                <a href="{{ pub.url }}" class="pub-title" target="_blank">{{ pub.title }}</a>
+                <span class="pub-authors">{{ pub.authors }}</span><br>
+                <span class="pub-venue">{{ pub.venue }}</span> | <span class="pub-year">{{ pub.year }}</span>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <p style="margin-top: 20px;">
+        <a href="https://orcid.org/TU_ORCID" target="_blank" style="color: var(--urjc-red); text-decoration: none; font-weight: bold;">
+            View full list on ORCID →
+        </a>
+    </p>
+</section>
         <section id="location">
             <h2>Our Location</h2>
             <p>We are located at Calle Tulipán S/N, Universidad Rey Juan Carlos Móstoles (Comunidad Autónoma Madrid, Spain).</p>
