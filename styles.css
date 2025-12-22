@@ -191,5 +191,57 @@ footer {
     color: #333;
 }
 
+
+/* 1. Imágenes y medios adaptativos */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 2. Contenedor principal */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 3. Listas de publicaciones y miembros en grid responsivo */
+.publications-list, .members-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Dos columnas en pantallas medianas */
+@media (min-width: 600px) {
+  .publications-list, .members-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tres columnas en pantallas grandes */
+@media (min-width: 1000px) {
+  .publications-list, .members-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 4. Navbar simple y adaptable */
+nav a {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+
 /* Eliminar position:fixed del footer si tienes mucho contenido, 
    es mejor que fluya al final de la página */
