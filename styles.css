@@ -243,5 +243,107 @@ nav a {
 }
 
 
+/* === 1) Imágenes y medios fluidos (sin tocar HTML) === */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === 2) Contenedor genérico con padding lateral suave en móvil === */
+.container,
+main, header, footer, section {
+  /* No forzamos max-width si ya lo tienes; solo aseguramos padding lateral cómodo */
+  padding-left: clamp(12px, 4vw, 24px);
+  padding-right: clamp(12px, 4vw, 24px);
+}
+
+/* === 3) Menú usable en móvil sin cambiar el markup ===
+   - En móvil, permitimos scroll horizontal del nav.
+   - Mantenemos el nav horizontal, sin apilar enlaces ni ocultar nada.
+   - Añadimos "scroll snap" y ocultamos barra visual (opcional). */
+@media (max-width: 700px) {
+  /* Ajusta al selector real de tu menú si no es 'nav' */
+  nav {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* IE/Edge antiguo */
+    scroll-snap-type: x proximity;  /* ancla suave al deslizar */
+    border-top: 1px solid #e5e7eb;  /* tenue, opcional */
+    padding: 8px 0;
+    margin: 0 -12px;                /* extiende al borde para gestos de pulgar */
+    padding-left: 12px;             /* reequilibra el padding tras el margin negativo */
+    -webkit-overflow-scrolling: touch;
+  }
+  nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+  nav a, nav button {
+    display: inline-block;
+    padding: 10px 12px;
+    margin-right: 4px;
+    border-radius: 10px;
+    scroll-snap-align: start;
+    text-decoration: none;
+    /* Colores neutros: no imponemos tu branding si ya lo tienes */
+    background: transparent;
+  }
+
+  /* Evita que elementos junto al nav (logo, buscador) colapsen el ancho útil */
+  header .brand, .logo, .site-title {
+    max-width: 65%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* === 4) Grids responsivos sin tocar HTML ===
+   Publicaciones y Members: 1 → 2 → 3 columnas según ancho
+   - Si ya tienes clases/ids distintos, cambia los selectores de abajo. */
+#publications-js-list,
+.publications-list,
+.members-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 600px) {
+  #publications-js-list,
+  .publications-list,
+  .members-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  #publications-js-list,
+  .publications-list,
+  .members-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Si cada publicación es un <div> genérico, le damos “tarjeta” suave sin romper tu theme */
+#publications-js-list > * {
+  background: var(--card, #fff);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  padding: 12px;
+}
+
+/* === 5) Tipografías fluidas ligeras (sin tocar tu escala si ya existe) === */
+h1 { font-size: clamp(1.8rem, 2.6vw + .5rem, 2.6rem); line-height: 1.15; margin: 0.2em 0; }
+h2 { font-size: clamp(1.4rem, 1.6vw + .5rem, 2rem);   line-height: 1.2;  margin: 0.6em 0 0.4em; }
+p, li { font-size: clamp(1rem, 0.3vw + .95rem, 1.075rem); }
+
+/* === 6) Seguridad anti-overflow en móvil === */
+html, body { overflow-x: hidden; }
+
+
+
 /* Eliminar position:fixed del footer si tienes mucho contenido, 
    es mejor que fluya al final de la página */
