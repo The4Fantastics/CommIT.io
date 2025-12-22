@@ -42,7 +42,7 @@ async function loadPublications() {
     
     try {
         // 1. Cargamos el archivo YAML (asegúrate de que la ruta es correcta)
-        const response = await fetch('./_data/publications.yml');
+        const response = await fetch('./data/publications.yml');
         
         if (!response.ok) throw new Error('No se pudo encontrar el archivo de publicaciones');
         
