@@ -29,23 +29,71 @@
     <main>
 <section id="selected-publications">
     <h2>Selected Publications</h2>
-    <div class="publications-list">
-        {% for pub in site.data.publications %}
-            {% if pub.highlight %}
-            <div class="pub-card">
-                <a href="{{ pub.url }}" class="pub-title" target="_blank">{{ pub.title }}</a>
-                <span class="pub-authors">{{ pub.authors }}</span><br>
-                <span class="pub-venue">{{ pub.venue }}</span> | <span class="pub-year">{{ pub.year }}</span>
-            </div>
-            {% endif %}
-        {% endfor %}
+    <div id="publications-js-list">
+        <p>Cargando publicaciones científicas...</p>
     </div>
-    <p style="margin-top: 20px;">
-        <a href="https://orcid.org/TU_ORCID" target="_blank" style="color: var(--urjc-red); text-decoration: none; font-weight: bold;">
-            View full list on ORCID →
-        </a>
-    </p>
 </section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
+<script>
+async function loadPublications() {
+    const container = document.getElementById('publications-js-list');
+    
+    try {
+        // 1. Cargamos el archivo YAML (asegúrate de que la ruta es correcta)
+        const response = await fetch('./_data/publications.yml');
+        
+        if (!response.ok) throw new Error('No se pudo encontrar el archivo de publicaciones');
+        
+        const text = await response.text();
+        
+        // 2. Convertimos YAML a objeto JavaScript
+        const pubs = jsyaml.load(text);
+        
+        // 3. Generamos el HTML dinámicamente
+        let html = '';
+        
+        // Filtramos y ordenamos (opcionalmente)
+        const selectedPubs = pubs.filter(p => p.highlight === true);
+
+        if (selectedPubs.length === 0) {
+            container.innerHTML = "<p>No hay publicaciones destacadas en este momento.</p>";
+            return;
+        }
+
+        selectedPubs.forEach(pub => {
+            html += `
+                <div class="pub-card" style="margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem;">
+                    <a href="${pub.url}" class="pub-title" target="_blank" 
+                       style="color: #2d3436; font-weight: 600; text-decoration: none; font-size: 1.1rem; display: block;">
+                       ${pub.title}
+                    </a>
+                    <div class="pub-authors" style="color: #636e72; font-size: 0.9rem; margin: 4px 0;">
+                        ${pub.authors}
+                    </div>
+                    <div class="pub-meta" style="font-size: 0.85rem;">
+                        <span class="pub-venue" style="color: #CB0017; font-style: italic;">${pub.venue}</span>
+                        <span class="pub-year" style="font-weight: bold; margin-left: 10px;">${pub.year}</span>
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+
+    } catch (e) {
+        console.error("Error:", e);
+        container.innerHTML = `
+            <p style="color: #666;">No se han podido cargar las publicaciones automáticamente.</p>
+            <a href="https://orcid.org/" target="_blank" style="color: #CB0017;">Ver en ORCID →</a>
+        `;
+    }
+}
+
+// Ejecutar la función al cargar la página
+document.addEventListener('DOMContentLoaded', loadPublications);
+</script>
     </main>
     <footer>
         <p>&copy; 2024 CommIT - Research Group</p>
